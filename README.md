@@ -2,7 +2,7 @@
 
 ## Overview
 
-WhatsApp Converter is a simple web application that allows users to generate WhatsApp links by entering a country code and phone number. The purpose of this project is to facilitate the process of initiating WhatsApp conversations with specific contacts through a user-friendly interface.
+WhatsApp Open Conversion is a simple web application that allows users to generate WhatsApp links by entering a country code and phone number. The purpose of this project is to facilitate the process of initiating WhatsApp conversations with specific contacts through a user-friendly interface.
 
 ## Features
 
