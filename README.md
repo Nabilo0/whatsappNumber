@@ -29,7 +29,7 @@ WhatsApp Open Conversion is a simple web application that allows users to genera
 To get started with the WhatsApp Converter, simply clone the repository and open the `index.html` file in your web browser.
 
 ```bash
-git clone https://github.com/your-username/whatsapp-converter.git
+git clone https://github.com/Nabilo0/whatsappNumber.git
 cd whatsapp-converter
 ```
 
