@@ -98,9 +98,10 @@
                 alert("Please enter both country code and phone number");
                 return;
             }
-
+    
+            var clearPhoneNumber = cleanInput(phoneNumber);
             // Create the WhatsApp link
-            var whatsappLink = 'https://wa.me/' + cleanInput(phoneNumber);
+            var whatsappLink = 'https://wa.me/' + clearPhoneNumber;
 
             // Open the WhatsApp link in a new tab
             window.open(whatsappLink, '_blank');
