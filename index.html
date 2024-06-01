@@ -99,6 +99,9 @@
                 alert("Please enter both country code and phone number");
                 return;
             }
+
+            clearPhoneNumber = clearPhoneNumber.replace(/\D/g, '');
+
     
             // Create the WhatsApp link
             var whatsappLink = 'https://wa.me/' + clearPhoneNumber;
