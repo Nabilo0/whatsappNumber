@@ -73,6 +73,20 @@
             document.getElementById('phoneNumber').value = "";
         }
 
+
+        function cleanInput(input) {
+            // Remove white spaces
+            let cleanedInput = input.replace(/\s+/g, '');
+            // Remove leading + or 00
+            if (cleanedInput.startsWith('+')) {
+                cleanedInput = cleanedInput.substring(1);
+            } else if (cleanedInput.startsWith('00')) {
+                cleanedInput = cleanedInput.substring(2);
+            }
+            return cleanedInput;
+        }
+
+
         function openWhatsApp() {
             // Get the country code and phone number from the input fields
             // var countryCode = document.getElementById('countryCode').value;
@@ -86,7 +100,7 @@
             }
 
             // Create the WhatsApp link
-            var whatsappLink = 'https://wa.me/' + phoneNumber;
+            var whatsappLink = 'https://wa.me/' + cleanInput(phoneNumber);
 
             // Open the WhatsApp link in a new tab
             window.open(whatsappLink, '_blank');
