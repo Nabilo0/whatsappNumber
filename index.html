@@ -33,23 +33,41 @@
 <body>
 
     <form>
-        <h1 class="text-center">WhatsApp Converter</h1>
+        <h1 class="text-center">WhatsApp Conversation</h1>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="countryCode">Country Code:</label>
             <input type="number" class="form-control" id="countryCode" placeholder="Country Code" value="218">
-        </div>
+        </div> -->
 
         <div class="form-group">
             <label for="phoneNumber">Phone Number:</label>
             <input type="number" class="form-control" id="phoneNumber" placeholder="Enter phone number">
         </div>
-
+        <button type="button" class="btn btn-primary btn-block" onclick="pasteData()">Paste Number</button>
         <button type="button" class="btn btn-success btn-block" onclick="openWhatsApp()">Open in WhatsApp</button>
         <button type="button" class="btn btn-secondary btn-block" onclick="clearInput()">Clear</button>
     </form>
-
+     
     <script>
+        //   function pasteData() {
+        //     // const dataToPaste = 'Hello, World!';
+        //     const inputField = document.getElementById('phoneNumber');
+        //     inputField.value = dataToPaste;
+        // }
+
+        function pasteData() {
+            navigator.clipboard.readText()
+                .then(text => {
+                    const inputField = document.getElementById('phoneNumber');
+                    inputField.value = text;
+                })
+                .catch(err => {
+                    console.error('Failed to read clipboard contents: ', err);
+                    alert('Failed to paste data. Please copy text to clipboard and try again.');
+                });
+        }
+
         function clearInput() {
             // Clear the phone number input field
             document.getElementById('phoneNumber').value = "";
@@ -57,17 +75,18 @@
 
         function openWhatsApp() {
             // Get the country code and phone number from the input fields
-            var countryCode = document.getElementById('countryCode').value;
+            // var countryCode = document.getElementById('countryCode').value;
             var phoneNumber = document.getElementById('phoneNumber').value;
 
             // Validate the country code and phone number
-            if (countryCode.trim() === "" || phoneNumber.trim() === "") {
+            // countryCode.trim() === "" ||
+            if ( phoneNumber.trim() === "") {
                 alert("Please enter both country code and phone number");
                 return;
             }
 
             // Create the WhatsApp link
-            var whatsappLink = 'https://wa.me/' + countryCode + phoneNumber;
+            var whatsappLink = 'https://wa.me/' + phoneNumber;
 
             // Open the WhatsApp link in a new tab
             window.open(whatsappLink, '_blank');
