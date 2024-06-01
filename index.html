@@ -91,7 +91,8 @@
             // Get the country code and phone number from the input fields
             // var countryCode = document.getElementById('countryCode').value;
             var phoneNumber = document.getElementById('phoneNumber').value;
-
+            var clearPhoneNumber = cleanInput(phoneNumber);
+            // console.log(clearPhoneNumber);
             // Validate the country code and phone number
             // countryCode.trim() === "" ||
             if ( phoneNumber.trim() === "") {
@@ -99,7 +100,6 @@
                 return;
             }
     
-            var clearPhoneNumber = cleanInput(phoneNumber);
             // Create the WhatsApp link
             var whatsappLink = 'https://wa.me/' + clearPhoneNumber;
 
