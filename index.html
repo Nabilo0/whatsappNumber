@@ -106,6 +106,7 @@
             // Get the country code and phone number from the input fields
             // var countryCode = document.getElementById('countryCode').value;
             var phoneNumber = document.getElementById('phoneNumber').value;
+            // use a ternary operator to make the condition a one-liner
             var clearPhoneNumber = phoneNumber.startsWith('0') ? phoneNumber.substring(1) : phoneNumber.startsWith('00') ? phoneNumber.substring(2) : phoneNumber;
 
             // var clearPhoneNumber = cleanInput(phoneNumber);
