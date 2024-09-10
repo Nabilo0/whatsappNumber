@@ -31,6 +31,8 @@
     </style>
 </head>
 <body>
+    <div class="card text-bg-light mb-3" style="max-width: 40rem;">
+        <!-- <div class="card-header">WhatsApp Conversation</div> -->
 
     <form>
         <h1 class="text-center">WhatsApp Conversation</h1>
@@ -39,16 +41,17 @@
             <label for="countryCode">Country Code:</label>
             <input type="number" class="form-control" id="countryCode" placeholder="Country Code" value="218">
         </div> -->
-
+             
         <div class="form-group">
             <label for="phoneNumber">Phone Number:</label>
             <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number">
         </div>
-        <button type="button" class="btn btn-primary btn-block" onclick="pasteData()">Paste Number</button>
+        <button type="button" class="btn btn-info btn-block" onclick="pasteData()">Paste Number</button>
         <button type="button" class="btn btn-success btn-block" onclick="openWhatsApp()">Open in WhatsApp</button>
         <button type="button" class="btn btn-secondary btn-block" onclick="clearInput()">Clear</button>
     </form>
-     
+</div>
+
     <script>
         //   function pasteData() {
         //     // const dataToPaste = 'Hello, World!';
