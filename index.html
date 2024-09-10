@@ -74,19 +74,32 @@
         }
 
 
-        function cleanInput(input) {
-            // Remove white spaces
-            let cleanedInput = input.replace(/\s+/g, '');
-            // Remove leading + or 00
-            if (cleanedInput.startsWith('+')) {
-                cleanedInput = cleanedInput.substring(1);
-            } else if (cleanedInput.startsWith('00')) {
-                cleanedInput = cleanedInput.substring(2);
-            } else if (cleanedInput.startsWith('0')) {
-                cleanedInput = cleanedInput.substring(1);
-            }
-            return cleanedInput;
-        }
+        // function cleanInput(input) {
+        //     // Remove white spaces
+        //     let cleanedInput = input.replace(/\s+/g, '');
+        //     // Remove leading + or 00
+        //     if (cleanedInput.startsWith('+')) {
+        //         cleanedInput = cleanedInput.substring(1);
+        //     } else if (cleanedInput.startsWith('00')) {
+        //         cleanedInput = cleanedInput.substring(2);
+        //     } else if (cleanedInput.startsWith('0')) {
+        //         cleanedInput = cleanedInput.substring(1);
+        //     }
+        //     return cleanedInput;
+        // }
+                function cleanInput(input) {
+                    // Remove white spaces
+                    let cleanedInput = input.replace(/\s+/g, '');
+                    
+                    // Remove leading 0 or 00
+                    if (cleanedInput.startsWith('00')) {
+                        cleanedInput = cleanedInput.substring(2);
+                    } else if (cleanedInput.startsWith('0')) {
+                        cleanedInput = cleanedInput.substring(1);
+                    }
+
+                    return cleanedInput;
+                }
 
 
         function openWhatsApp() {
