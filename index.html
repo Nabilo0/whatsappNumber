@@ -80,14 +80,13 @@
             // Remove leading + or 00
             if (cleanedInput.startsWith('+')) {
                 cleanedInput = cleanedInput.substring(1);
-            }  else if (cleanedInput.startsWith('0')){
-                cleanedInput = cleanedInput.substring(1);
-            }  else if (cleanedInput.startsWith('00')){
-                cleanedInput = cleanedInput.substring(2);
             }
             return cleanedInput;
         }
-
+    // }  else if (cleanedInput.startsWith('0')){
+    //             cleanedInput = cleanedInput.substring(1);
+    //         }  else if (cleanedInput.startsWith('00')){
+    //             cleanedInput = cleanedInput.substring(2);
 
         function openWhatsApp() {
             // Get the country code and phone number from the input fields
