@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <title>WhatsApp Conversation</title>
+
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            max-width: 400px;
+            width: 100%;
+            padding: 15px;
+            margin: auto;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .keypad button {
+            padding: 15px;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+            /* Set font size to prevent Safari zoom */
+            input {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card text-bg-light mb-3" style="max-width: 40rem;">
+        <form>
+            <h1 class="text-center">WhatsApp Conversation</h1>
+            
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number">
+            </div>
+            
+            <button type="button" class="btn btn-info btn-block" onclick="pasteData()">Paste Number</button>
+            <button type="button" class="btn btn-success btn-block" onclick="openWhatsApp()">Open in WhatsApp</button>
+            <button type="button" class="btn btn-secondary btn-block" onclick="clearInput()">Clear</button>
+            
+            <!-- Keypad for number input -->
+            <div class="keypad">
+                <!-- Create buttons for numbers 1 to 9, and 0 -->
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('1')">1</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('2')">2</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('3')">3</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('4')">4</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('5')">5</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('6')">6</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('7')">7</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('8')">8</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('9')">9</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('0')">0</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function appendNumber(number) {
+            const inputField = document.getElementById('phoneNumber');
+            inputField.value += number;
+        }
+
+        function pasteData() {
+            navigator.clipboard.readText()
+                .then(text => {
+                    const inputField = document.getElementById('phoneNumber');
+                    inputField.value = text;
+                })
+                .catch(err => {
+                    console.error('Failed to read clipboard contents: ', err);
+                    alert('Failed to paste data. Please copy text to clipboard and try again.');
+                });
+        }
+
+        function clearInput() {
+            document.getElementById('phoneNumber').value = "";
+        }
+
+        function openWhatsApp() {
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var clearPhoneNumber = phoneNumber.startsWith('0') ? phoneNumber.substring(1) : phoneNumber.startsWith('00') ? phoneNumber.substring(2) : phoneNumber;
+            clearPhoneNumber = clearPhoneNumber.replace(/\D/g, '');
+
+            if (phoneNumber.trim() === "") {
+                alert("Please enter a phone number");
+                return;
+            }
+
+            var whatsappLink = 'https://wa.me/' + clearPhoneNumber;
+            window.open(whatsappLink, '_blank');
+        }
+
+
+
+         // Disable double-tap zoom on Safari
+         let lastTouchEnd = 0;
+        
+        document.addEventListener('touchend', function (event) {
+            const now = new Date().getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
