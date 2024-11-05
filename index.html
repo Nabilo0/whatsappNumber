@@ -1,9 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
     <title>WhatsApp Conversation</title>
 
     <!-- Add Bootstrap CSS -->
@@ -16,19 +19,19 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f8f9fa;
         }
 
-        .container {
+        form {
             max-width: 400px;
             width: 100%;
+            padding: 15px;
+            margin: auto;
         }
 
-        .phone-input {
-            margin-bottom: 20px;
+        button {
+            margin-top: 10px;
         }
 
-        /* Keypad styling */
         .keypad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -37,70 +40,52 @@
         }
 
         .keypad button {
-            font-size: 24px;
+            padding: 15px;
+            font-size: 1.25rem;
             font-weight: bold;
-            padding: 20px;
-            border: none;
-            border-radius: 50%;
-            background-color: #e0e0e0;
-            color: #333;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
         }
 
-        .keypad button:active {
-            background-color: #b0b0b0;
-            transform: scale(0.95);
-        }
-
-        .keypad .zero {
-            grid-column: 2 / span 1;
-        }
-
-        /* Button styles */
-        .btn-action {
-            margin-top: 10px;
+            /* Set font size to prevent Safari zoom */
+            input {
             font-size: 16px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="card text-bg-light mb-3" style="max-width: 40rem;">
         <form>
             <h1 class="text-center">WhatsApp Conversation</h1>
-
-            <div class="form-group phone-input">
+            
+            <div class="form-group">
                 <label for="phoneNumber">Phone Number:</label>
-                <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number" readonly>
+                <input type="text" class="form-control" id="phoneNumber" placeholder="Enter phone number">
             </div>
             
-            <!-- Number keypad -->
+            <button type="button" class="btn btn-info btn-block" onclick="pasteData()">Paste Number</button>
+            <button type="button" class="btn btn-success btn-block" onclick="openWhatsApp()">Open in WhatsApp</button>
+            <button type="button" class="btn btn-secondary btn-block" onclick="clearInput()">Clear</button>
+            
+            <!-- Keypad for number input -->
             <div class="keypad">
-                <button type="button" onclick="addNumber('1')">1</button>
-                <button type="button" onclick="addNumber('2')">2</button>
-                <button type="button" onclick="addNumber('3')">3</button>
-                <button type="button" onclick="addNumber('4')">4</button>
-                <button type="button" onclick="addNumber('5')">5</button>
-                <button type="button" onclick="addNumber('6')">6</button>
-                <button type="button" onclick="addNumber('7')">7</button>
-                <button type="button" onclick="addNumber('8')">8</button>
-                <button type="button" onclick="addNumber('9')">9</button>
-                <button class="zero" type="button" onclick="addNumber('0')">0</button>
+                <!-- Create buttons for numbers 1 to 9, and 0 -->
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('1')">1</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('2')">2</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('3')">3</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('4')">4</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('5')">5</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('6')">6</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('7')">7</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('8')">8</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('9')">9</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="appendNumber('0')">0</button>
             </div>
-
-            <!-- Action buttons -->
-            <button type="button" class="btn btn-info btn-action btn-block" onclick="pasteData()">Paste Number</button>
-            <button type="button" class="btn btn-success btn-action btn-block" onclick="openWhatsApp()">Open in WhatsApp</button>
-            <button type="button" class="btn btn-secondary btn-action btn-block" onclick="clearInput()">Clear</button>
         </form>
     </div>
 
     <script>
-        // Function to add numbers to the input
-        function addNumber(num) {
+        function appendNumber(number) {
             const inputField = document.getElementById('phoneNumber');
-            inputField.value += num;
+            inputField.value += number;
         }
 
         function pasteData() {
@@ -120,20 +105,34 @@
         }
 
         function openWhatsApp() {
-            const phoneNumber = document.getElementById('phoneNumber').value;
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var clearPhoneNumber = phoneNumber.startsWith('0') ? phoneNumber.substring(1) : phoneNumber.startsWith('00') ? phoneNumber.substring(2) : phoneNumber;
+            clearPhoneNumber = clearPhoneNumber.replace(/\D/g, '');
+
             if (phoneNumber.trim() === "") {
                 alert("Please enter a phone number");
                 return;
             }
 
-            const cleanPhoneNumber = phoneNumber.replace(/\D/g, '');
-            const whatsappLink = 'https://wa.me/' + cleanPhoneNumber;
-
+            var whatsappLink = 'https://wa.me/' + clearPhoneNumber;
             window.open(whatsappLink, '_blank');
         }
+
+
+
+         // Disable double-tap zoom on Safari
+         let lastTouchEnd = 0;
+        
+        document.addEventListener('touchend', function (event) {
+            const now = new Date().getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 
-    <!-- Add Bootstrap JS (optional, for certain Bootstrap features) -->
+    <!-- Add Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
